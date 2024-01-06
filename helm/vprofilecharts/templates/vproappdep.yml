@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: vproapp
-  labels: 
+  labels:
     app: vproapp
 spec:
   replicas: 1
@@ -12,12 +12,11 @@ spec:
   template:
     metadata:
       labels:
-        app: vproapp 
+        app: vproapp
     spec:
       containers:
       - name: vproapp
-        image: {{.Values.appimage}}: {{ .Valuesalues.apptag}}
-
+        image: {{.Values.appimage}}:{{.Values.apptag}}  # Fix indentation here
         
         ports:
         - name: vproapp-port
@@ -29,4 +28,3 @@ spec:
       - name: init-memcache
         image: busybox
         command: ['sh', '-c', 'until nslookup vprocache01.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for mydb; sleep 2; done;']
-
