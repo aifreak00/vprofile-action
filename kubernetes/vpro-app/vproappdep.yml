@@ -12,11 +12,12 @@ spec:
   template:
     metadata:
       labels:
-        app: vproapp
+        app: vproapp 
     spec:
       containers:
       - name: vproapp
-        image: vprofile/vprofileapp
+        image: {{. Values.appimage}}: {{ .Values.apptag}}
+
         
         ports:
         - name: vproapp-port
